@@ -1,32 +1,41 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserShiftRequest } from "../UserShiftRequest/userShiftRequest.entity";
-import { UserShifts } from "../UserShiftEntity/userShift.entity";
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserShiftRequest } from '../UserShiftRequest/userShiftRequest.entity';
+import { UserShifts } from '../UserShiftEntity/userShift.entity';
+import { ObjectType, Field } from '@nestjs/graphql';
 
 @Entity()
+@ObjectType()
 export class User {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @Field()
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @Field()
+  @Column({
+    nullable: false,
+    default: '',
+  })
+  name: string;
 
-    @Column({
-        nullable: false, default: '',
-    })
-    name: string;
+  @Field()
+  @Column({
+    nullable: false,
+    default: '',
+  })
+  email: string;
 
-    @Column({
-        nullable: false, default: '',
-    })
-    email: string;
-    @Column({
-        nullable: false, default: '',
-    })
-    phone: string;
+  @Field()
+  @Column({
+    nullable: false,
+    default: '',
+  })
+  phone: string;
 
+  @Field(() => [UserShiftRequest], { nullable: true }) // Make shiftRequests optional
+  @OneToMany(() => UserShiftRequest, (request) => request.user)
+  shiftRequests: UserShiftRequest[];
 
-    @OneToMany(() => UserShiftRequest, (request) => request.user)
-    shiftRequests: UserShiftRequest[];
-
-    @OneToMany(() => UserShifts, (shift) => shift.user)
-    userShifts: UserShifts[];
+  @Field(() => [UserShifts], { nullable: true }) // Make shiftRequests optional
+  @OneToMany(() => UserShifts, (shift) => shift.user)
+  userShifts: UserShifts[];
 }

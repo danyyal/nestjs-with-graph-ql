@@ -41,6 +41,5 @@ async function bootstrap() {
 
   // Start the application
   await app.listen(3000);
-
 }
 bootstrap();

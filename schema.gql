@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserShifts {
+  id: String!
+  createTime: DateTime!
+  user: User!
+  eventShift: EventShift!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  phone: String!
+  shiftRequests: [UserShiftRequest!]
+  userShifts: [UserShifts!]
+}
+
+type UserShiftRequest {
+  id: String!
+  createTime: DateTime!
+  status: String!
+  user: User
+  eventShift: EventShift
+}
+
+type EventShift {
+  id: String!
+  startTime: DateTime!
+  endTime: DateTime!
+  name: String!
+  shiftRequests: [UserShiftRequest!]!
+}
+
+type Query {
+  getAllUsers: [User!]!
+  getAllEventShifts: [EventShift!]!
+  getAllShiftRequests: [UserShiftRequest!]!
+  getAllUserShifts: [UserShifts!]!
+}
+
+type Mutation {
+  createUser(userCreateInput: UserCreateDto!): User!
+  createEventShift(eventShiftInput: EventShiftCreateDto!): EventShift!
+  createShiftRequest(shiftRequestInput: ShiftRequestCreateDto!): UserShiftRequest!
+  toggleShiftRequest(id: String!, shiftRequestUpdateInput: ShiftRequestUpdateDto!): UserShiftRequest!
+}
+
+input UserCreateDto {
+  name: String!
+  email: String!
+  phone: String!
+}
+
+input EventShiftCreateDto {
+  startTime: String!
+  endTime: String!
+  name: String!
+}
+
+input ShiftRequestCreateDto {
+  userId: String!
+  eventShiftId: String!
+  status: String!
+}
+
+input ShiftRequestUpdateDto {
+  status: String!
+}

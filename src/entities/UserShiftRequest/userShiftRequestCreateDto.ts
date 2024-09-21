@@ -1,26 +1,29 @@
-import { IsEmail, IsEnum, IsString, IsUUID } from "class-validator";
-import { ShiftStatus } from "./userShiftRequest.entity";
+import { IsEmail, IsEnum, IsString, IsUUID } from 'class-validator';
+import { ShiftStatus } from './userShiftRequest.entity';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class ShiftRequestCreateDto {
-    @IsUUID()
-    @IsString()
-    userId: string;
+  @Field()
+  @IsUUID()
+  @IsString()
+  userId: string;
 
-    @IsUUID()
-    @IsString()
-    eventShiftId: string;
+  @Field()
+  @IsUUID()
+  @IsString()
+  eventShiftId: string;
 
-    @IsString()
-    @IsEnum(
-        ShiftStatus,
-    )
-    status: string;
+  @Field()
+  @IsString()
+  @IsEnum(ShiftStatus)
+  status: string;
 }
 
+@InputType()
 export class ShiftRequestUpdateDto {
-    @IsString()
-    @IsEnum(
-        ShiftStatus,
-    )
-    status: ShiftStatus;
+  @Field()
+  @IsString()
+  @IsEnum(ShiftStatus)
+  status: ShiftStatus;
 }

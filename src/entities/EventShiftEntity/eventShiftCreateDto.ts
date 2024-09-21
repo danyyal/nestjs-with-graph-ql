@@ -1,10 +1,17 @@
-import { IsDateString, IsEmail, IsString } from "class-validator";
+import { IsDateString, IsEmail, IsString } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class EventShiftCreateDto {
-    @IsDateString()
-    startTime: string;
-    @IsDateString()
-    endTime: string;
-    @IsString()
-    name: string;
+  @Field()
+  @IsDateString()
+  startTime: string;
+
+  @Field()
+  @IsDateString()
+  endTime: string;
+
+  @Field()
+  @IsString()
+  name: string;
 }

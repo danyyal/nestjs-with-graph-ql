@@ -6,12 +6,14 @@ import { User } from 'src/entities/UserEntity/user.entity';
 import { EventShift } from 'src/entities/EventShiftEntity/eventShift.entity';
 import { UserShiftRequest } from 'src/entities/UserShiftRequest/userShiftRequest.entity';
 import { UserShifts } from 'src/entities/UserShiftEntity/userShift.entity';
+import { UserResolver } from './user.resolver';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, EventShift, UserShiftRequest, UserShifts])
+    TypeOrmModule.forFeature([User, EventShift, UserShiftRequest, UserShifts]),
   ],
   controllers: [UserController],
-  providers: [UserService]
+
+  providers: [UserService, UserResolver],
 })
-export class UserModule { }
+export class UserModule {}

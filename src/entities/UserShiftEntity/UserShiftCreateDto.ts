@@ -1,10 +1,15 @@
-import { IsEmail, IsString } from "class-validator";
+import { IsEmail, IsString } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class UserCreateDto {
-    @IsString()
-    name: string;
-    @IsEmail()
-    email: string;
-    @IsString()
-    phone: string;
+  @Field()
+  @IsString()
+  name: string;
+  @Field()
+  @IsEmail()
+  email: string;
+  @Field()
+  @IsString()
+  phone: string;
 }
